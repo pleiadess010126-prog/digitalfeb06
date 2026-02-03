@@ -1,0 +1,170 @@
+// Core Types for the Autonomous Marketing Engine
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  createdAt: Date;
+  plan?: 'free' | 'starter' | 'pro' | 'enterprise';
+  stripeCustomerId?: string;
+  organization?: string;
+}
+
+export interface OnboardingData {
+  websiteUrl: string;
+  brandName: string;
+  industry: string;
+  targetAudience: string;
+  uniqueValueProposition: string;
+
+  // Social Media Handles
+  socialMedia: {
+    youtube?: string;
+    instagram?: string;
+    facebook?: string;
+    twitter?: string;
+    linkedin?: string;
+  };
+
+  // API Credentials (encrypted in production)
+  credentials: {
+    wordpress?: {
+      url: string;
+      username: string;
+      appPassword: string;
+    };
+    meta?: {
+      appId: string;
+      appSecret: string;
+      accessToken: string;
+      pageAccessToken?: string;
+      instagramAccountId?: string;
+      facebookPageId?: string;
+      instagramUsername?: string;
+      facebookPageName?: string;
+    };
+    youtube?: {
+      apiKey: string;
+      channelId: string;
+    };
+    googleSearchConsole?: {
+      siteUrl: string;
+      serviceAccountKey: string;
+    };
+  };
+}
+
+export interface Campaign {
+  id: string;
+  name: string;
+  status: 'active' | 'paused' | 'completed';
+  createdAt: Date;
+  stats: CampaignStats;
+  settings: CampaignSettings;
+}
+
+export interface CampaignStats {
+  totalContent: number;
+  publishedThisMonth: number;
+  organicTraffic: number;
+  trafficGrowth: number;
+  avgDwellTime: number;
+  indexationRate: number;
+  riskScore: number;
+}
+
+export interface CampaignSettings {
+  velocity: {
+    month1: number;
+    month2: number;
+    month3: number;
+  };
+  contentTypes: {
+    blog: boolean;
+    youtube: boolean;
+    instagram: boolean;
+    facebook: boolean;
+  };
+  autoPublish: boolean;
+  requireApproval: boolean;
+}
+
+export interface ContentItem {
+  id: string;
+  title: string;
+  type: 'blog' | 'youtube-short' | 'instagram-reel' | 'facebook-story' | 'tiktok-video' | 'wechat-article' | 'vk-post';
+  status: 'draft' | 'pending' | 'approved' | 'published' | 'rejected';
+  createdAt: Date;
+  scheduledFor?: Date;
+  publishedAt?: Date;
+  content: string;
+  metadata: {
+    keywords: string[];
+    topicPillar: string;
+    targetKeyword?: string;
+    seoScore: number;
+    geoScore?: number; // Generative Engine Optimization score (0-100)
+    geoGrade?: 'A+' | 'A' | 'B' | 'C' | 'D' | 'F'; // GEO grade
+    wordCount?: number;
+    hashtags?: string[];
+    estimatedReadTime?: number;
+    geoBreakdown?: {
+      directness: number;      // 0-100: How directly content answers queries
+      authority: number;       // 0-100: Citations, data, expert references
+      structure: number;       // 0-100: Formatting for AI parsing
+      conversational: number;  // 0-100: Natural dialogue flow
+      freshness: number;       // 0-100: Timeliness signals
+      snippetOptimization: number; // 0-100: Featured snippet readiness
+      semanticRichness: number;    // 0-100: Entity and concept density
+      readability: number;     // 0-100: Ease of comprehension
+    };
+    geoRecommendations?: string[]; // Improvement suggestions
+    geoStrengths?: string[];       // What's working well
+    videoUrl?: string;             // URL to generated video for social
+    thumbUrl?: string;             // URL to thumbnail
+    mediaId?: string;              // Platform-specific media ID
+    author?: string;               // Author name
+    healingAttempts?: number;      // Number of generation/refinement cycles
+  };
+  performance?: {
+    views: number;
+    engagement: number;
+    dwellTime: number;
+  };
+}
+
+export interface TopicPillar {
+  id: string;
+  name: string;
+  description: string;
+  keywords: string[];
+  contentCount: number;
+  priority: number;
+}
+
+export interface RiskAlert {
+  id: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  type: 'indexation' | 'bounce-rate' | 'traffic-cliff' | 'spam-signal' | 'velocity';
+  message: string;
+  detectedAt: Date;
+  resolved: boolean;
+  recommendation: string;
+}
+
+export interface AIAgent {
+  id: string;
+  name: string;
+  type: 'supervisor' | 'seo-worker' | 'social-worker' | 'risk-worker' | 'video-worker' | 'analytics-worker' | 'geo-worker' | 'chatbot-worker';
+  status: 'idle' | 'working' | 'error';
+  lastActive: Date;
+  tasksCompleted: number;
+}
+
+export interface RoadmapItem {
+  week: number;
+  month: number;
+  contentTarget: number;
+  topics: string[];
+  status: 'upcoming' | 'in-progress' | 'completed';
+}
