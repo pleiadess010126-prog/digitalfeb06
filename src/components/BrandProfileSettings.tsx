@@ -253,6 +253,10 @@ export default function BrandProfileSettings({
                             fromEmail: profile.fromEmail,
                             fromPhone: profile.fromPhone,
                             brandColor: profile.primaryColor,
+                            timezone: 'UTC',
+                            defaultLanguage: 'en',
+                            emailNotifications: true,
+                            weeklyReports: true,
                         }
                     });
                     console.log('✅ Local save successful');
@@ -274,6 +278,10 @@ export default function BrandProfileSettings({
                     fromEmail: profile.fromEmail,
                     fromPhone: profile.fromPhone,
                     brandColor: profile.primaryColor,
+                    timezone: 'UTC',
+                    defaultLanguage: 'en',
+                    emailNotifications: true,
+                    weeklyReports: true,
                 }
             };
 

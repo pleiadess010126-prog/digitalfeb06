@@ -2,7 +2,13 @@ const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
+});
 
 async function createQuickAdmin() {
     console.log('\n🔐 Quick Admin Creation\n');
