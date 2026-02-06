@@ -16,6 +16,9 @@ const typeConfig = {
     'youtube-short': { icon: Video, label: 'YouTube Short', color: 'text-red-400' },
     'instagram-reel': { icon: Instagram, label: 'Instagram Reel', color: 'text-pink-400' },
     'facebook-story': { icon: Facebook, label: 'Facebook Story', color: 'text-blue-500' },
+    'tiktok-video': { icon: Video, label: 'TikTok Video', color: 'text-cyan-400' },
+    'wechat-article': { icon: FileText, label: 'WeChat Article', color: 'text-green-500' },
+    'vk-post': { icon: FileText, label: 'VK Post', color: 'text-blue-600' },
 };
 
 interface ContentQueueProps {
@@ -78,10 +81,10 @@ export default function ContentQueue({ items, onApprove, onReject }: ContentQueu
                                                             GEO: {item.metadata.geoScore}/100
                                                             {item.metadata.geoGrade && (
                                                                 <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] ${item.metadata.geoGrade === 'A+' || item.metadata.geoGrade === 'A'
-                                                                        ? 'bg-emerald-100 text-emerald-700'
-                                                                        : item.metadata.geoGrade === 'B'
-                                                                            ? 'bg-blue-100 text-blue-700'
-                                                                            : 'bg-amber-100 text-amber-700'
+                                                                    ? 'bg-emerald-100 text-emerald-700'
+                                                                    : item.metadata.geoGrade === 'B'
+                                                                        ? 'bg-blue-100 text-blue-700'
+                                                                        : 'bg-amber-100 text-amber-700'
                                                                     }`}>
                                                                     {item.metadata.geoGrade}
                                                                 </span>
